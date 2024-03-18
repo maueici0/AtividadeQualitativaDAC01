@@ -12,7 +12,7 @@ create table Categoria (
 	descricao varchar(100)
 );
 
-create table ProdutoCategoria (
+create table RelacaoProdutoCategoria (
 	id serial primary key,
 	idProduto int,
 	idCategoria int,

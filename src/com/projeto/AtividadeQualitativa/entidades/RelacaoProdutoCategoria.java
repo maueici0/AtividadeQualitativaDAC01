@@ -1,6 +1,6 @@
 package com.projeto.AtividadeQualitativa.entidades;
 
-public class ProdutoCategoria {
+public class RelacaoProdutoCategoria {
     
     private Long id;
     private Categoria categoria;

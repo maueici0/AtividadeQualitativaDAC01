@@ -17,7 +17,7 @@ public class ProdutoDao {
         this.connection = new ConnectionFactory().getConnection();
     }
 
-    public Produto criarProduto(Produto produto) {
+    public Produto criaProduto(Produto produto) throws SQLException {
 
         String sql = "insert into Produto (nome, marca, precoUnitario, quantidade) values (?,?,?,?)";
         try {
@@ -35,12 +35,12 @@ public class ProdutoDao {
 
     }
 
-    public Produto buscarProdutoPorId(Long id) {
+    public Produto buscaProdutoPorId(Long id) throws SQLException {
 
         String sql = "select * from Produto where id=?";
         Produto produto = new Produto();
         try {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
@@ -59,7 +59,7 @@ public class ProdutoDao {
 
     }
 
-    public ArrayList<Produto> buscarProdutos() {
+    public ArrayList<Produto> buscaProdutos() throws SQLException {
 
         String sql = "select * from Produto";
         ArrayList<Produto> produtos = new ArrayList<Produto>();
@@ -84,7 +84,7 @@ public class ProdutoDao {
 
     }
 
-    public void deletaProduto(Long id) {
+    public void deletaProduto(Long id) throws SQLException {
 
         String sql = "delete from Produto where id=?";
         try {
@@ -98,7 +98,8 @@ public class ProdutoDao {
 
     }
 
-    public Produto atualizaProduto (Produto produto) {
+    public Produto atualizaProduto (Produto produto) throws SQLException {
+
         String sql = "update Produto set valorUnitario=?, quantidade=? where id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -111,5 +112,6 @@ public class ProdutoDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
     }
 }
