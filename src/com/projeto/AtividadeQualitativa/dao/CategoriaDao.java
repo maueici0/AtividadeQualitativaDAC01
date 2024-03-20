@@ -107,14 +107,13 @@ public class CategoriaDao {
 
     public Categoria atualizaCategoria(Categoria categoria) throws SQLException {
 
-        String sql = "Update Categoria set nome=?, descricao=? where id=?";
+        String sql = "Update Categoria set descricao=? where id=?";
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setLong(1, categoria.getId());
-            statement.setString(2, categoria.getNome());
-            statement.setString(3, categoria.getDescricao());
+            statement.setString(2, categoria.getDescricao());
 
             statement.execute();
             statement.close();

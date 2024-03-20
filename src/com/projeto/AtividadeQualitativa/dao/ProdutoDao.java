@@ -100,7 +100,7 @@ public class ProdutoDao {
 
     public Produto atualizaProduto (Produto produto) throws SQLException {
 
-        String sql = "update Produto set valorUnitario=?, quantidade=? where id=?";
+        String sql = "update Produto set precoUnitario=?, quantidade=? where id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, produto.getPrecoUnitario());
