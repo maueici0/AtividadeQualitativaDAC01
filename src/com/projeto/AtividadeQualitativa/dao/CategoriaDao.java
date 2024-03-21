@@ -112,8 +112,8 @@ public class CategoriaDao {
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setLong(1, categoria.getId());
-            statement.setString(2, categoria.getDescricao());
+            statement.setString(1, categoria.getDescricao());
+            statement.setLong(2, categoria.getId());
 
             statement.execute();
             statement.close();

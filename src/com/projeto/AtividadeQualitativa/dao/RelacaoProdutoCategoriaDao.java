@@ -20,7 +20,7 @@ public class RelacaoProdutoCategoriaDao {
     }
 
     public RelacaoProdutoCategoria criaRelacaoProdutoCategoria(RelacaoProdutoCategoria relacao) throws SQLException {
-        String sql = "insert into ProdutoCategoria (idProduto,idCategoria) values (?,?)";
+        String sql = "insert into relacaoProdutoCategoria (idProduto,idCategoria) values (?,?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, relacao.getProduto().getId());
@@ -35,7 +35,7 @@ public class RelacaoProdutoCategoriaDao {
 
     public RelacaoProdutoCategoria buscaRelacaoProdutoCategoriaPorId(Long id) throws SQLException {
 
-        String sql = "select * from ProdutoCategoria where id=?";
+        String sql = "select * from relacaoProdutoCategoria where id=?";
         RelacaoProdutoCategoria relacao = new RelacaoProdutoCategoria();
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

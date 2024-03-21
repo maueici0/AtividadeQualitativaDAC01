@@ -59,6 +59,11 @@ public class App {
                 System.out.println("Informe o id do produto a ser atualizado:");
                 produto = produtoDao.buscaProdutoPorId((long) scanner.nextInt());
 
+                if(produto.getId() == null){
+                    System.out.println("Produto não encontrado");
+                    break;
+                }
+
                 System.out.println("Insira o novo preço unitário:");
                 produto.setPrecoUnitario(scanner.nextDouble());
 
@@ -74,6 +79,11 @@ public class App {
                 
                 case 3:
                 //listar produtos
+
+                if(produtoDao.buscaProdutos().isEmpty()){
+                    System.out.println("Ainda não há produtos cadastrados");
+                    break;
+                }
                 for (Produto p : produtoDao.buscaProdutos()) {
 
                     System.out.println("Id: "+ p.getId());
@@ -92,6 +102,11 @@ public class App {
                 //buscar produto por id
                 System.out.println("Insira o id do produto desejado:");
                 produto = produtoDao.buscaProdutoPorId((long) scanner.nextInt());
+
+                if(produto.getId() == null){
+                    System.out.println("Produto não encontrado");
+                    break;
+                }
 
                 System.out.println("Nome: " + produto.getNome());
                 System.out.println("Marca: " + produto.getMarca());
@@ -141,6 +156,11 @@ public class App {
                 System.out.println("Informe o id da categoria a ser atualizada:");
                 categoria = categoriaDao.buscaCategoriaPorId((long) scanner.nextInt());
 
+                if(categoria.getId() == null){
+                    System.out.println("Categoria não encontrada");
+                    break;
+                }
+
                 System.out.println("Insira a nova descrição:");
                 categoria.setDescricao(scanner.next());
 
@@ -153,11 +173,16 @@ public class App {
 
                 case 3:
                 //listar categorias
+                if(categoriaDao.buscaCategoria().isEmpty()){
+                    System.out.println("Ainda não há categorias cadastradas");
+                    break;
+                }
                 for (Categoria c : categoriaDao.buscaCategoria()) {
 
                     System.out.println("Id: "+ c.getId());
                     System.out.println("Nome: "+ c.getNome());
-                    System.out.println("Marca: "+ c.getDescricao());
+                    System.out.println("Descrição: "+ c.getDescricao());
+                    System.out.println("\n");
 
                 };
                 scanner.next();
@@ -168,8 +193,13 @@ public class App {
                 System.out.println("Informe o id da categoria desejada:");
                 categoria = categoriaDao.buscaCategoriaPorId((long) scanner.nextInt());
 
-                System.out.println(categoria.getNome());
-                System.out.println(categoria.getDescricao());
+                if(categoria.getId() == null){
+                    System.out.println("Categoria não encontrada");
+                    break;
+                }
+
+                System.out.println("Nome: " + categoria.getNome());
+                System.out.println("Descrição: " + categoria.getDescricao());
                 
                 scanner.next();
                 break;
@@ -207,6 +237,8 @@ public class App {
                 Categoria categoria = categoriaDao.buscaCategoriaPorId((long) scanner.nextInt());
                 relacaoProdutoCategoria.setCategoria(categoria);
 
+                relacaoProdutoCategoriaDao.criaRelacaoProdutoCategoria(relacaoProdutoCategoria);
+
                 System.out.println("Relação entre produto e categoria criada.");
 
                 scanner.next();
@@ -214,12 +246,18 @@ public class App {
 
                 case 2:
                 //lista relacoes
+
+                if(relacaoProdutoCategoriaDao.buscaRelacoesProdutoCategoria().isEmpty()){
+                    System.out.println("Ainda não há relações cadastradas");
+                    break;
+                }
                 
                 for (RelacaoProdutoCategoria r: relacaoProdutoCategoriaDao.buscaRelacoesProdutoCategoria()){
 
-                    System.out.println(r.getId());
-                    System.out.println(r.getProduto());
-                    System.out.println(r.getCategoria());
+                    System.out.println("Id: " + r.getId());
+                    System.out.println("Produto: " + produtoDao.buscaProdutoPorId(r.getId()).getNome());
+                    System.out.println("Id Categoria: " + categoriaDao.buscaCategoriaPorId(r.getId()).getNome());
+                    System.out.println("\n");
 
                 }
 
@@ -231,7 +269,14 @@ public class App {
                 System.out.println("Informe o id da relação desejada:");
                 relacaoProdutoCategoria = relacaoProdutoCategoriaDao.buscaRelacaoProdutoCategoriaPorId((long) scanner.nextInt());
 
-                System.out.println(relacaoProdutoCategoria);
+                if(relacaoProdutoCategoria.getProduto() == null){
+                    System.out.println("Relação não encontrada");
+                    break;
+                }
+
+                System.out.println("Produto: " + relacaoProdutoCategoria.getProduto());
+                System.out.println("Categoria: " + relacaoProdutoCategoria.getCategoria());
+                System.out.println("\n");
                 
                 scanner.next();
                 break;
